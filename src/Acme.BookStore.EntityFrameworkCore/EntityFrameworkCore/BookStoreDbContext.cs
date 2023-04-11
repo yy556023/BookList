@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Acme.BookStore.Books;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -52,6 +54,8 @@ public class BookStoreDbContext :
 
     #endregion
 
+    public DbSet<Book> Books { get; set; } // 於BookStore資料庫 新增 Books資料表
+
     public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
         : base(options)
     {
@@ -81,5 +85,16 @@ public class BookStoreDbContext :
         //    b.ConfigureByConvention(); //auto configure for the base class props
         //    //...
         //});
+
+        /* 這段Code需要問Rock or Cara 背後是執行甚麼動作 */
+        // ↓↓↓
+        builder.Entity<Book>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "Books",  // <== Class BookStoreConsts 為 專案 BookStore定義常數的Class 
+                BookStoreConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props // 方法优雅的配置/映射继承的属性,应对所有的实体使用它 <== 不懂是甚麼意思
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128); // Book 的 Name 屬性 為必填 且最大長度限制為128
+        });
+
     }
 }
