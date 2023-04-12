@@ -25,6 +25,8 @@
                             [
                                 {
                                     text: l('Edit'),
+                                    // abp.auth.isGranted(...) 检查前面定义的权限
+                                    visible: abp.auth.isGranted('BookStore.Books.Edit'), //CHECK for the PERMISSION
                                     /* "Edit" 动作简单地调用 editModal.open() 打开编辑模态框. */
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
@@ -32,6 +34,7 @@
                                 },
                                 {
                                     text: l('Delete'),
+                                    visible: abp.auth.isGranted('BookStore.Books.Delete'), //CHECK for the PERMISSION
                                     /* confirmMessage 执行 action 前向用户进行确认 */
                                     confirmMessage: function (data) {
                                         return l('BookDeletionConfirmationMessage', data.record.name);
