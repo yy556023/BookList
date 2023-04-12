@@ -17,6 +17,22 @@
             ajax: abp.libs.datatables.createAjax(acme.bookStore.books.book.getList),
             /* acme.bookStore.books.book.getList 是动态JavaScript代理函数(上面已经介绍过了) */
             columnDefs: [
+                /* 在 columnDefs 部分的开头添加了一个新列,用于"Actions"下拉按钮. */
+                {
+                    title: l('Actions'),
+                    rowAction: {
+                        items:
+                            [
+                                {
+                                    text: l('Edit'),
+                                    /* "Edit" 动作简单地调用 editModal.open() 打开编辑模态框. */
+                                    action: function (data) {
+                                        editModal.open({ id: data.record.id });
+                                    }
+                                },
+                            ]
+                    }
+                },
                 {
                     title: l('Name'),
                     data: "name"
@@ -59,10 +75,20 @@
 
     /* abp.ModalManager 是一个在客户端管理modal的辅助类.
     它内部使用了Twitter Bootstrap的标准modal组件,但通过简化的API抽象了许多细节. */
+    debugger
+    // abp.appPath => 默認 Pages的根目錄 所以值為 "/"
     var createModal = new abp.ModalManager(abp.appPath + 'Books/CreateModal');
+
+    /* 增加了一个新的 ModalManager 名为 editModal 打开编辑模态框. */
+    var editModal = new abp.ModalManager(abp.appPath + 'Books/EditModal');
 
     /* createModal.onResult(...) 用于在创建书籍后刷新数据表格. */
     createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    /* editModal.onResult(...) 当你关闭编程模态框时进行回调刷新数据表格. */
+    editModal.onResult(function () {
         dataTable.ajax.reload();
     });
 
