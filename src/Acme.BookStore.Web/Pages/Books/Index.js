@@ -30,6 +30,22 @@
                                         editModal.open({ id: data.record.id });
                                     }
                                 },
+                                {
+                                    text: l('Delete'),
+                                    /* confirmMessage 执行 action 前向用户进行确认 */
+                                    confirmMessage: function (data) {
+                                        return l('BookDeletionConfirmationMessage', data.record.name);
+                                    },
+                                    action: function (data) {
+                                        acme.bookStore.books.book
+                                            .delete(data.record.id)
+                                            .then(function () {
+                                                /* abp.notify.info 执行删除操作后显示一个通知信息. */
+                                                abp.notify.info(l('SuccessfullyDeleted'));
+                                                dataTable.ajax.reload();
+                                            });
+                                    }
+                                }
                             ]
                     }
                 },
@@ -75,7 +91,7 @@
 
     /* abp.ModalManager 是一个在客户端管理modal的辅助类.
     它内部使用了Twitter Bootstrap的标准modal组件,但通过简化的API抽象了许多细节. */
-    debugger
+    
     // abp.appPath => 默認 Pages的根目錄 所以值為 "/"
     var createModal = new abp.ModalManager(abp.appPath + 'Books/CreateModal');
 
