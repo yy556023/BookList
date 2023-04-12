@@ -8,6 +8,9 @@
 @{
     Layout = null;
 }
+
+@*这个 modal 使用 abp-dynamic-form tag Helper 根据 CreateUpdateBookDto 类自动构建了表单.*@
+@*abp-model 指定了 Book 属性为模型对象.*@
 <abp-dynamic-form abp-model="Book" asp-page="/Books/CreateModal">
     <abp-modal>
         <abp-modal-header title="@L["NewBook"].Value"></abp-modal-header>
