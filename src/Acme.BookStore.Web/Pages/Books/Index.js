@@ -20,7 +20,7 @@
                     title: l('Type'),
                     data: "type",
                     render: function (data) {
-                        return l('Enum:BookType:' + data);
+                        return l('Enum:BookType.' + data);
                     }
                 },
                 {
