@@ -1,4 +1,5 @@
-﻿using Acme.BookStore.Books;
+﻿using Acme.BookStore.Authors;
+using Acme.BookStore.Books;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -55,6 +56,7 @@ public class BookStoreDbContext :
     #endregion
 
     public DbSet<Book> Books { get; set; } // 於BookStore資料庫 新增 Books資料表
+    public DbSet<Author> Authors { get; set; } // 於BookStore資料庫 新增 Authors資料表
 
     public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
         : base(options)
@@ -101,6 +103,17 @@ public class BookStoreDbContext :
             // Mapping 
             // 將資料庫裡的資料欄位 對照類別的屬性 動作為ORMapping 
             // Convention 慣例配置
+        });
+
+        builder.Entity<Author>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "Authors",
+                BookStoreConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(AuthorConsts.MaxNameLength);
+            b.HasIndex(x => x.Name); // 使用Name屬性 做為索引
         });
 
     }
