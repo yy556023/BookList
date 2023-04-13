@@ -1,4 +1,5 @@
-﻿using Acme.BookStore.Books;
+﻿using Acme.BookStore.Authors;
+using Acme.BookStore.Books;
 using AutoMapper;
 
 namespace Acme.BookStore;
@@ -16,5 +17,7 @@ public class BookStoreApplicationAutoMapperProfile : Profile
         CreateMap<Book, BookDto>();
         // 由於會經由前端傳送資訊來更新 Book實體 所以此處使用AutoMapper自動轉換為Book
         CreateMap<CreateUpdateBookDto, Book>();
+        // AuthorAppService 使用 ObjectMapper 將 Author 轉換為 AuthorDto. 所以我們需要在 AutoMapper 配置中定義他
+        CreateMap<Author, AuthorDto>();
     }
 }
