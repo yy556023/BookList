@@ -51,7 +51,7 @@ namespace Acme.BookStore.Web.Pages.Books
 
             [Required]
             [StringLength(128)]
-            public string Name { get; set; }
+            public string? Name { get; set; }
 
             [Required]
             public BookType Type { get; set; } = BookType.Undefined;

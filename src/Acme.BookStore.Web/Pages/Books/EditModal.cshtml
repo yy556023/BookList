@@ -13,7 +13,7 @@
         <abp-modal-header title="@L["Update"].Value"></abp-modal-header>
         <abp-modal-body>
             @* 它包含id属性的abp-input, 用于存储被编辑书籍的 id (它是隐藏的Input) *@
-            <abp-input asp-for="Id" />
+            @*<abp-input asp-for="Id" />*@
             <abp-form-content />
         </abp-modal-body>
         <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
