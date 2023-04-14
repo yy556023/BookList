@@ -17,5 +17,10 @@ public class BookStoreWebAutoMapperProfile : Profile
         // 由於從Application Layer傳出來時事AuthorDto 所以建立由 AuthorDto 轉換到 EditAuthorViewModel 的映射
         CreateMap<AuthorDto, Pages.Authors.EditModalModel.EditAuthorViewModel>();
         CreateMap<Pages.Authors.EditModalModel.EditAuthorViewModel, UpdateAuthorDto>();
+
+        CreateMap<Pages.Books.CreateModalModel.CreateBookViewModel, CreateUpdateBookDto>();
+        CreateMap<BookDto, Pages.Books.EditModalModel.EditBookViewModel>();
+        CreateMap<Pages.Books.EditModalModel.EditBookViewModel, CreateUpdateBookDto>();
+
     }
 }
