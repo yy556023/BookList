@@ -5,6 +5,6 @@ namespace Acme.BookStore.Books
 {
     public class AuthorLookupDto : EntityDto<Guid>
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

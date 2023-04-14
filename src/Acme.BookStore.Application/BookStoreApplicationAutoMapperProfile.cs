@@ -19,5 +19,7 @@ public class BookStoreApplicationAutoMapperProfile : Profile
         CreateMap<CreateUpdateBookDto, Book>();
         // AuthorAppService 使用 ObjectMapper 將 Author 轉換為 AuthorDto. 所以我們需要在 AutoMapper 配置中定義他
         CreateMap<Author, AuthorDto>();
+        CreateMap<Author, AuthorLookupDto>();
+
     }
 }
