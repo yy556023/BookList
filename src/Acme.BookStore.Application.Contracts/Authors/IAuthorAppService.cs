@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Acme.BookStore.Books;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
@@ -18,5 +19,7 @@ namespace Acme.BookStore.Authors
         Task UpdateAsync(Guid id, UpdateAuthorDto input);
 
         Task DeleteAsync(Guid id);
+
+        Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync();
     }
 }
