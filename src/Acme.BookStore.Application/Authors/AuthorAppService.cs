@@ -41,7 +41,7 @@ namespace Acme.BookStore.Authors
                 input.SkipCount,
                 input.MaxResultCount,
                 input.Sorting,
-                input.Filter
+                input.Filter!
             );
 
             var totalCount = input.Filter == null
@@ -59,9 +59,9 @@ namespace Acme.BookStore.Authors
         public async Task<AuthorDto> CreateAsync(CreateAuthorDto input)
         {
             var author = await _authorManager.CreateAsync(
-                input.Name,
+                input.Name!,
                 input.BirthDate,
-                input.ShortBio
+                input.ShortBio!
             );
 
             await _authorRepository.InsertAsync(author);
