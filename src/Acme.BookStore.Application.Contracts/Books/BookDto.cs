@@ -12,5 +12,10 @@ namespace Acme.BookStore.Books
         public DateTime PublishDate { get; set; }
 
         public float Price { get; set; }
+
+        // 新增作者屬性
+        public Guid AuthorId { get; set; }
+
+        public string? AuthorName { get; set; }
     }
 }
