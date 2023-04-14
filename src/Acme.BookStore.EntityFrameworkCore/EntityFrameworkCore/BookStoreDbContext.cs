@@ -96,7 +96,7 @@ public class BookStoreDbContext :
                 BookStoreConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props // 方法优雅的配置/映射继承的属性,应对所有的实体使用它 <== 不懂是甚麼意思
             b.Property(x => x.Name).IsRequired().HasMaxLength(128); // Book 的 Name 屬性 為必填 且最大長度限制為128
-
+            b.HasOne<Author>().WithMany().HasForeignKey(x => x.AuthorId).IsRequired();
             // OR Mapping
             // Original / Object 
             // Related 關聯
