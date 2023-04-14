@@ -6,6 +6,6 @@ namespace Acme.BookStore.Authors
     public class GetAuthorListDto : PagedAndSortedResultRequestDto
     {
         // Filter 用於查詢作者(sorting Method). 它可以是 null 或 string.Empty 以獲得所有用戶.
-        public string Filter { get; set; }
+        public string? Filter { get; set; }
     }
 }
